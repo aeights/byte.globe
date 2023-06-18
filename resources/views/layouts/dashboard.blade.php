@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Byte Globe Dashboard">
     <meta name="author" content="Muhammad Afif Ma'ruf">
-    <title>Dashboard</title>
+    <title>Dashboard {{ $title }}</title>
     <!-- Favicon -->
     <link rel="icon" href="{{url('argon/assets/img/brand/favicon.png')}}" type="image/png">
     <!-- Fonts -->
@@ -15,6 +15,12 @@
     <link rel="stylesheet" href="{{asset('argon/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('argon/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" type="text/css">
     <!-- Page plugins -->
+    {{-- Table plugin --}}
+    <link rel="stylesheet" href="{{asset('argon/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('argon/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('argon/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
+    {{-- Select --}}
+    <link rel="stylesheet" href="{{asset('argon/assets/vendor/select2/dist/css/select2.min.css')}}">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="{{asset('argon/assets/css/argon.css?v=1.1.0')}}" type="text/css">
 </head>
@@ -25,8 +31,8 @@
         <div class="scrollbar-inner">
             <!-- Brand -->
             <div class="sidenav-header d-flex align-items-center">
-                <a class="navbar-brand" href="../../pages/dashboards/dashboard.html">
-                    <img src="../../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+                <a class="navbar-brand" href="">
+                    <img src="/argon/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
                 </a>
                 <div class="ml-auto">
                     <!-- Sidenav toggler -->
@@ -45,19 +51,71 @@
                 <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                     <!-- Nav items -->
                     <ul class="navbar-nav">
+                        @if (Auth::user()->role == 'admin')    
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-dashboards">
+                            <a class="nav-link active" href="/dashboard/admin">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Dashboards</span>
                             </a>
                             <div class="collapse show" id="navbar-dashboards">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="../../pages/dashboards/dashboard.html" class="nav-link">Dashboard</a>
+                                        <a href="/dashboard/admin" class="nav-link">Main</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/dashboard/user">
+                                <i class="ni ni-shop text-primary"></i>
+                                <span class="nav-link-text">Dashboards</span>
+                            </a>
+                            <div class="collapse show" id="navbar-dashboards">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="/dashboard/user" class="nav-link">Main</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        @endif
+                        @if (Auth::user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false"
+                                aria-controls="navbar-examples">
+                                <i class="ni ni-ungroup text-orange"></i>
+                                <span class="nav-link-text">Admin Post</span>
+                            </a>
+                            <div class="collapse" id="navbar-examples">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="/dashboard/admin/post" class="nav-link">All Post</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/dashboard/admin/post/add" class="nav-link">Add Post</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#navbar-components" data-toggle="collapse" role="button" aria-expanded="false"
+                                aria-controls="navbar-components">
+                                <i class="ni ni-ui-04 text-info"></i>
+                                <span class="nav-link-text">User Post</span>
+                            </a>
+                            <div class="collapse" id="navbar-components">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="/dashboard/admin/user-post" class="nav-link">All Post</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/dashboard/admin/post" class="nav-link">Liked Post</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        @else
                         <li class="nav-item">
                             <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="navbar-examples">
@@ -67,34 +125,15 @@
                             <div class="collapse" id="navbar-examples">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="" class="nav-link">All Post</a>
+                                        <a href="/dashboard/user/post" class="nav-link">All Post</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="" class="nav-link">Add Post</a>
+                                        <a href="/dashboard/user/post/add" class="nav-link">Add Post</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#navbar-components" data-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="navbar-components">
-                                <i class="ni ni-ui-04 text-info"></i>
-                                <span class="nav-link-text">Report</span>
-                            </a>
-                            <div class="collapse" id="navbar-components">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link">Accept Post</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link">Liked Post</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link">Favorited Post</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        @endif
                     </ul>
                     <!-- Divider -->
                     <hr class="my-3">
@@ -179,7 +218,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-auto">
                                                 <!-- Avatar -->
-                                                <img alt="Image placeholder" src="../../assets/img/theme/team-2.jpg"
+                                                <img alt="Image placeholder" src="/argon/assets/img/theme/team-2.jpg"
                                                     class="avatar rounded-circle">
                                             </div>
                                             <div class="col ml--2">
@@ -315,10 +354,10 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 <div class="media align-items-center">
                                     <span class="avatar avatar-sm rounded-circle">
-                                        <img alt="Image placeholder" src="../../assets/img/theme/team-4.jpg">
+                                        <img alt="Image placeholder" src="/argon/assets/img/theme/team-4.jpg">
                                     </span>
                                     <div class="media-body ml-2 d-none d-lg-block">
-                                        <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                                        <span class="mb-0 text-sm  font-weight-bold">{{ Auth::user()->name }}</span>
                                     </div>
                                 </div>
                             </a>
@@ -343,7 +382,7 @@
                                     <span>Support</span>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="#!" class="dropdown-item">
+                                <a href="/logout" class="dropdown-item">
                                     <i class="ni ni-user-run"></i>
                                     <span>Logout</span>
                                 </a>
@@ -359,21 +398,7 @@
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center py-4">
-                        <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
-                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a>
-                                    </li>
-                                    <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Default</li>
-                                </ol>
-                            </nav>
-                        </div>
-                        <div class="col-lg-6 col-5 text-right">
-                            <a href="#" class="btn btn-sm btn-neutral">New</a>
-                            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
-                        </div>
+                        @yield('links')
                     </div>
                     <!-- Card stats -->
                     <div class="row">
@@ -385,9 +410,7 @@
         <!-- Page content -->
         <div class="container-fluid mt--6">
             <div class="row">
-                <div class="col-xl-12">
-                    @yield('content')
-                </div>
+                @yield('content')
             </div>
             <!-- Footer -->
             <footer class="footer pt-0">
@@ -426,6 +449,40 @@
     <!-- Optional JS -->
     <script src="{{asset('argon/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
     <script src="{{asset('argon/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
+    <!-- Data Table JS -->
+    <script src="{{asset('argon/assets/vendor/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('argon/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('argon/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('argon/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('argon/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('argon/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+    <script src="{{asset('argon/assets/vendor/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('argon/assets/vendor/datatables.net-select/js/dataTables.select.min.js')}}"></script>
+    <!-- Validation JS -->
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+    <!-- Select Form -->
+    <script src="{{asset('argon/assets/vendor/select2/dist/js/select2.min.js')}}"></script>
+    <!-- Table -->
+    <script src="{{asset('argon/assets/vendor/list.js/dist/list.min.js')}}"></script>
     <!-- Argon JS -->
     <script src="{{asset('argon/assets/js/argon.js?v=1.1.0')}}"></script>
     <!-- Demo JS - remove this in your project -->
