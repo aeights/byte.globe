@@ -119,4 +119,28 @@ class AdminPostController extends Controller
             'posts' => Post::all()
         ]);
     }
+
+    public function detailUserPost(Request $request)
+    {
+        return view('admin.detailuserpost',[
+            'title' => 'Admin',
+            'post' => Post::find($request->id)
+        ]);
+    }
+
+    public function saveUserPost(Request $request)
+    {
+        $post = Post::find($request->id);
+        $post->status=$request->status;
+        $post->save();
+        return redirect('/')->with('message','Post successfully updated');
+    }
+
+    public function deleteUserPost(Request $request)
+    {
+        $post = Post::find($request->id);
+        $post->delete();
+        unlink('post image/'.$request->old_image);
+        return back()->with('message','Delete post successfully');
+    }
 }

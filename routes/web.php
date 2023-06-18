@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\UserPostController;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.dashboard');
-});
+Route::get('/',[BlogController::class,'blog']);
+
+Route::get('/category/{id}',[BlogController::class,'category']);
 
 // AUTH
 Route::get('/login',[LoginController::class,'show'])->name('login');
@@ -53,6 +54,12 @@ Route::middleware(['auth'])->group(function () {
 
     // User Post
     Route::get('/dashboard/admin/user-post',[AdminPostController::class,'userPost']);
+
+    Route::get('/dashboard/admin/user-post/detail',[AdminPostController::class,'detailUserPost']);
+
+    Route::post('/save-user-post',[AdminPostController::class,'saveUserPost']);
+
+    Route::post('/delete-user-post',[AdminPostController::class,'deleteUserPost']);
     
     
     // USER

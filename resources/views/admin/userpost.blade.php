@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('links')
+    
+@endsection
 @section('content')
     <div class="col">
         <div class="card">
@@ -19,6 +22,7 @@
                             <th>Category</th>
                             <th>Body</th>
                             <th>Created At</th>
+                            <th>Status</th>
                             <th>Option</th>
                         </tr>
                     </thead>
@@ -30,6 +34,7 @@
                             <th>Category</th>
                             <th>Body</th>
                             <th>Created At</th>
+                            <th>Status</th>
                             <th>Option</th>
                         </tr>
                     </tfoot>
@@ -37,11 +42,47 @@
                         @foreach ($posts as $item)    
                         <tr>
                             <td>{{ $item->user['name'] }}</td>
-                            <td>{{ $item->title }}</td>
+                            <td>{{ substr($item->title,0,20) }}...</td>
                             <td><img class="rounded" style="height: 35px;" src="{{ asset('post image/'.$item->image) }}" alt="{{ $item->image }}"></td>
-                            <td>{{ $item-> }}</td>
-                            <td>{{ $item-> }}</td>
-                            <td>{{ $item-> }}</td>
+                            <td>{{ $item->category['category'] }}</td>
+                            <td>{{ substr($item->body,0,30) }}...</td>
+                            <td>{{ $item->created_at }}</td>
+                            <td>
+                                <span class="badge badge-dot">
+                                    @if ($item->status == 'Pending')
+                                    <i class="bg-info"></i>
+                                    <span>{{ $item->status }}</span>
+                                    @endif
+                                    @if ($item->status == 'Accepted')
+                                    <i class="bg-success"></i>
+                                    <span>{{ $item->status }}</span>
+                                    @endif
+                                    @if ($item->status == 'Decline')
+                                    <i class="bg-warning"></i>
+                                    <span>{{ $item->status }}</span>
+                                    @endif
+                                </span>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                        <form action="{{ url('/dashboard/admin/user-post/detail') }}" method="GET">
+                                            @csrf
+                                            <input value="{{ $item->id }}" type="hidden" name="id">
+                                            <button type="submit" class="dropdown-item">Detail</button>
+                                        </form>
+                                        <form action="{{ url('/delete-user-post') }}" method="POST" onsubmit="return confirm('Are you sure want to delete this post?')">
+                                            @csrf
+                                            <input value="{{ $item->id }}" type="hidden" name="id">
+                                            <input value="{{ $item->image }}" type="hidden" name="old_image">
+                                            <button type="submit" class="dropdown-item">Delete</button>
+                                        </form>
+                                    </div>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
