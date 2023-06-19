@@ -26,7 +26,7 @@ class LoginController extends Controller
         if ($validated) {
             if (Auth::attempt($validated)) {
                 if (Auth::user()->role == 'user') {
-                    return redirect('/dashboard/user');
+                    return redirect('/dashboard/user')->with('message','Login successfully');
                 }
                 elseif (Auth::user()->role == 'admin') {
                     return redirect('/dashboard/admin')->with('message','Login successfully');

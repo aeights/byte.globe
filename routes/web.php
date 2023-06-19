@@ -20,22 +20,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// BLOG
 Route::get('/',[BlogController::class,'blog']);
 
 Route::get('/category/{id}',[BlogController::class,'category']);
 
-// AUTH
-Route::get('/login',[LoginController::class,'show'])->name('login');
+Route::middleware(['guest'])->group(function () {
+    // AUTH
+    Route::get('/login',[LoginController::class,'show'])->name('login');
 
-Route::post('/login-process',[LoginController::class,'login']);
+    Route::post('/login-process',[LoginController::class,'login']);
 
-Route::get('/register',[RegisterController::class,'show']);
+    Route::get('/register',[RegisterController::class,'show']);
 
-Route::post('/register-process',[RegisterController::class,'register']);
+    Route::post('/register-process',[RegisterController::class,'register']);
 
-Route::get('/logout',[LoginController::class,'logout']);
+    Route::get('/logout',[LoginController::class,'logout']);
 
-Route::middleware(['auth'])->group(function () {
+});
+
+Route::middleware(['auth','role:admin'])->group(function () {
     // DASHBOARD
     // ADMIN
     Route::get('/dashboard/admin',[AdminDashboardController::class,'show']);
@@ -60,8 +64,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/save-user-post',[AdminPostController::class,'saveUserPost']);
 
     Route::post('/delete-user-post',[AdminPostController::class,'deleteUserPost']);
-    
-    
+});
+
+Route::middleware(['auth','role:user'])->group(function () {
     // USER
     Route::get('/dashboard/user',[UserDashboardController::class,'show']);
 

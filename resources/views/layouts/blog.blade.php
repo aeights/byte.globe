@@ -58,10 +58,14 @@
 
                             <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
                                 <li class="active"><a href="/">Home</a></li>
-                                @if (Auth::user()->role == 'user')
-                                <li><a href="/dashboard/user">Dashboard</a></li>
+                                @if (Auth::check())    
+                                    @if (Auth::user()->role == 'user')
+                                    <li><a href="/dashboard/user">Dashboard</a></li>
+                                    @else
+                                    <li><a href="/dashboard/admin">Dashboard</a></li>
+                                    @endif
                                 @else
-                                <li><a href="/dashboard/admin">Dashboard</a></li>
+                                <li><a href="/dashboard/user">Dashboard</a></li>
                                 @endif
                                 <li class="has-children">
                                     <a href="category.html">Category</a>
@@ -84,10 +88,16 @@
                             </form>
                         </div>
                         <div class="col-3">
+                            @if (Auth::check())    
+                            <div>
+                                <a href="/logout" class="btn btn-sm btn-primary p-2">Logout</a>
+                            </div>
+                            @else    
                             <div>
                                 <a href="/login" class="btn btn-sm btn-primary p-2">Login</a>
                                 <a href="/register" class="btn btn-sm btn-primary p-2">Register</a>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -34,7 +34,7 @@ class RegisterController extends Controller
             return redirect('/login')->with('message','Account successfully created');
         }
         else {
-            dd('error bro');
+            return back()->with('message','Error');
         }
     }
 }

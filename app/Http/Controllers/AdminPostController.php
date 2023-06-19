@@ -133,7 +133,7 @@ class AdminPostController extends Controller
         $post = Post::find($request->id);
         $post->status=$request->status;
         $post->save();
-        return redirect('/')->with('message','Post successfully updated');
+        return redirect('/dasboard/admin/user-post')->with('message','Post successfully updated');
     }
 
     public function deleteUserPost(Request $request)
