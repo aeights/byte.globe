@@ -106,62 +106,39 @@
         </div>
     </nav>
 
-    <!-- Start retroy layout blog posts -->
-    <section class="section bg-light">
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col-sm-6">
-                    <h2 class="posts-entry-title">Featured Post</h2>
-                </div>
-            </div>
-            <div class="row align-items-stretch retro-layout">
-                @yield('top')
-            </div>
-        </div>
-    </section>
-    <!-- End retroy layout blog posts -->
+    <div class="section search-result-wrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="heading">Search: {{ $keyword }}</div>
+				</div>
+			</div>
+			<div class="row posts-entry">
+				<div class="col-lg-8">
+					@yield('content')
+				</div>
 
-    <!-- Start posts-entry -->
-    {{-- <section class="section posts-entry">
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col-sm-6">
-                    <h2 class="posts-entry-title">Programming</h2>
-                </div>
-                <div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
-            </div>
-            <div class="row g-3">
-                <div class="col-md-9">
-                    <div class="row g-3">
-                        @yield('first-left')
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <ul class="list-unstyled blog-entry-sm">
-                        @yield('first-right')
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- End posts-entry -->
+				<div class="col-lg-4 sidebar">
+					
+					<div class="sidebar-box search-form-wrap mb-4">
+						<form action="#" class="sidebar-search-form">
+							<span class="bi-search"></span>
+							<input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+						</form>
+					</div>
 
-    <section class="section">
-        <div class="container">
-
-            <div class="row mb-4">
-                <div class="col-sm-6">
-                    <h2 class="posts-entry-title">All Post</h2>
-                </div>
-                <div class="col-sm-6 text-sm-end"><a href="" class="read-more">View All</a></div>
-            </div>
-
-            <div class="row">
-                @yield('all-post')
-            </div>
-
-        </div>
-    </section>
+					<div class="sidebar-box">
+						<h3 class="heading">Categories</h3>
+						<ul class="categories">
+                            @foreach ($category as $item)
+							<li><a href="{{ url('/category/'.$item->id) }}">{{ $item->category }}</span></a></li>
+                            @endforeach
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
     <footer class="site-footer">
         <div class="container">

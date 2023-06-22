@@ -3,7 +3,7 @@
     <div class="col-md-4">
         <a href="" class="h-entry mb-30 v-height gradient">
             <div class="featured-img">
-                <img style="background-size: cover; height: 300px;" src="{{ asset('/post image/' . $random[0]->image) }}"
+                <img style="object-fit: cover; height: 300px;" src="{{ asset('/post image/' . $random[0]->image) }}"
                     alt="">
             </div>
 
@@ -14,7 +14,7 @@
         </a>
         <a href="" class="h-entry v-height gradient">
             <div class="featured-img">
-                <img style="background-size: cover; height: 300px;" src="{{ asset('/post image/' . $random[1]->image) }}"
+                <img style="object-fit: cover; height: 300px;" src="{{ asset('/post image/' . $random[1]->image) }}"
                     alt="">
             </div>
 
@@ -27,7 +27,7 @@
     <div class="col-md-4">
         <a href="" class="h-entry img-5 h-100 gradient">
             <div class="featured-img">
-                <img style="background-size: cover;" src="{{ asset('/post image/' . $random[2]->image) }}" alt="">
+                <img style="object-fit: cover; height: 550px;" src="{{ asset('/post image/' . $random[2]->image) }}" alt="">
             </div>
 
             <div class="text">
@@ -39,7 +39,7 @@
     <div class="col-md-4">
         <a href="" class="h-entry mb-30 v-height gradient">
             <div class="featured-img">
-                <img style="background-size: cover; height: 300px;" src="{{ asset('/post image/' . $random[3]->image) }}"
+                <img style="object-fit: cover; height: 300px;" src="{{ asset('/post image/' . $random[3]->image) }}"
                     alt="">
             </div>
 
@@ -50,7 +50,7 @@
         </a>
         <a href="" class="h-entry v-height gradient">
             <div class="featured-img">
-                <img style="background-size: cover; height: 300px;" src="{{ asset('/post image/' . $random[4]->image) }}"
+                <img style="object-fit: cover; height: 300px;" src="{{ asset('/post image/' . $random[4]->image) }}"
                     alt="">
             </div>
 

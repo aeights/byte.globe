@@ -17,4 +17,43 @@ class BlogController extends Controller
             'allpost' => Post::all(),
         ]);
     }
+    
+    public function post($slug)
+    {
+        return view('post',[
+            'category' => Category::all(),
+            'post' => Post::where('slug',$slug)->fitst()
+        ]);
+    }
+
+    public function category($id)
+    {
+        return view('category',[
+            'category' => Category::all(),
+            'ctg' => Category::where('id',$id)->first(),
+            'posts' => Post::where('category_id',$id)->get()
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $validated = $request->validate([
+            'keyword' => 'required'
+        ]);
+
+        if ($validated) {
+            $posts = Post::where('title','LIKE','%'.$request->keyword.'%')->get();
+            if ($posts) {
+                return view('search',[
+                    'category' => Category::all(),
+                    'keyword' => $request->keyword,
+                    'posts' => $posts
+                ]);
+            }else{
+                return back()->with('message','Barang yang anda cari tidak ada');
+            }
+        } else{
+            return back()->with('message','Ketikkan barang yang ingin anda cari');
+        }
+    }
 }

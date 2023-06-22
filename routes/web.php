@@ -23,7 +23,11 @@ use Illuminate\Support\Facades\Route;
 // BLOG
 Route::get('/',[BlogController::class,'blog']);
 
+Route::get('/post/{slug}',[BlogController::class,'post']);
+
 Route::get('/category/{id}',[BlogController::class,'category']);
+
+Route::post('/search',[BlogController::class,'search']);
 
 Route::middleware(['guest'])->group(function () {
     // AUTH
