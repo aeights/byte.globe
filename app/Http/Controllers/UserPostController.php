@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+date_default_timezone_set("Asia/Jakarta");
+
 class UserPostController extends Controller
 {
     public function post()

@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+date_default_timezone_set("Asia/Jakarta");
+
 class RegisterController extends Controller
 {
     public function show()

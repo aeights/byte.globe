@@ -61,7 +61,7 @@
         </a>
     </div>
 @endsection
-@section('first-left')
+{{-- @section('first-left')
     <div class="col-md-6">
         <div class="blog-entry">
             <a href="" class="img-link">
@@ -106,18 +106,16 @@
         <p>{{ substr($programming[4]->body, 0, 30) }}</p>
         <p><a href="#" class="read-more">Continue Reading</a></p>
     </li>
-@endsection
+@endsection --}}
 @section('all-post')
     @foreach ($allpost as $item)
     <div class="col-lg-4 mb-4">
         <div class="post-entry-alt">
-            <a href="" class="img-link"><img src="{{ asset('post image/'.$item->image) }}" alt="Image"
+            <a href="" class="img-link"><img style="object-fit: cover; height: 250px;" src="{{ asset('post image/'.$item->image) }}" alt="Image"
                     class="img-fluid"></a>
             <div class="excerpt">
                 <h2><a href="">{{ $item->title }}</a></h2>
                 <div class="post-meta align-items-center text-left clearfix">
-                    {{-- <figure class="author-figure mb-0 me-3 float-start"><img src="images/person_5.jpg" alt="Image"
-                            class="img-fluid"></figure> --}}
                     <span class="d-inline-block mt-1">By <a href="#">{{ $item->user['name'] }}</a></span>
                     <span>{{ $item->created_at }}</span>
                 </div>
