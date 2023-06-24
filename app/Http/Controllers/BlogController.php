@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\LikedPost;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -22,11 +24,32 @@ class BlogController extends Controller
     public function post($slug)
     {
         $post = Post::where('slug',$slug)->first();
-        return view('post',[
-            'category' => Category::all(),
-            'post' => $post,
-            'image' => asset('post image/'.$post->image)
-        ]);
+
+        if (Auth::check()) {
+            if (count(LikedPost::where('user_id',Auth::user()->id)->where('post_id',$post->id)->get()) == 1) {
+                return view('post',[
+                    'category' => Category::all(),
+                    'post' => $post,
+                    'image' => asset('post image/'.$post->image),
+                    'IsLiked' => true
+                ]);
+            } else {
+                return view('post',[
+                    'category' => Category::all(),
+                    'post' => $post,
+                    'image' => asset('post image/'.$post->image),
+                    'IsLiked' => false
+                ]);
+            }
+            
+        } else {
+            return view('post',[
+                'category' => Category::all(),
+                'post' => $post,
+                'image' => asset('post image/'.$post->image),
+                'IsLiked' => false
+            ]);
+        }
     }
 
     public function category($id)
@@ -58,5 +81,21 @@ class BlogController extends Controller
         } else{
             return back()->with('message','Ketikkan barang yang ingin anda cari');
         }
+    }
+
+    public function like($id)
+    {
+        $like = new LikedPost();
+        $like->user_id=Auth::user()->id;
+        $like->post_id=$id;
+        $like->save();
+        return back()->with('message','Post liked!');
+    }
+
+    public function unlike($id)
+    {
+        $like = LikedPost::where('user_id',Auth::user()->id)->where('post_id',$id)->first();
+        $like->delete();
+        return back()->with('message','Post Unliked!');
     }
 }

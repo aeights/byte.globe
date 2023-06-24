@@ -52,12 +52,12 @@
                 </div>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="/dashboard/user" class="nav-link">
                             <span class="nav-link-inner--text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="/" class="nav-link">
                             <span class="nav-link-inner--text">Blog</span>
                         </a>
                     </li>

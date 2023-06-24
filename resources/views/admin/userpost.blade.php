@@ -82,6 +82,7 @@
                                             <button type="submit" class="dropdown-item">Delete</button>
                                         </form>
                                     </div>
+                                </div>
                             </td>
                         </tr>
                         @endforeach

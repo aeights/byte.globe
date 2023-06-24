@@ -29,6 +29,10 @@ Route::get('/category/{id}',[BlogController::class,'category']);
 
 Route::post('/search',[BlogController::class,'search']);
 
+Route::get('/like/{id}',[BlogController::class,'like'])->middleware('auth');
+
+Route::get('/unlike/{id}',[BlogController::class,'unlike'])->middleware('auth');
+
 Route::middleware(['guest'])->group(function () {
     // AUTH
     Route::get('/login',[LoginController::class,'show'])->name('login');
@@ -60,6 +64,8 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
     Route::post('/delete-admin-post',[AdminPostController::class,'deleteAdminPost']);
 
+    Route::get('/dashboard/admin/liked-post',[AdminPostController::class,'likedAdminPost']);
+
     // User Post
     Route::get('/dashboard/admin/user-post',[AdminPostController::class,'userPost']);
 
@@ -85,4 +91,6 @@ Route::middleware(['auth','role:user'])->group(function () {
     Route::post('/edit-user-post',[UserPostController::class,'processEditPost']);
 
     Route::post('/delete-user-post',[UserPostController::class,'deletePost']);
+
+    Route::get('/dashboard/user/liked-post',[UserPostController::class,'likedPost']);
 });

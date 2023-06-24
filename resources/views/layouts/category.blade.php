@@ -121,9 +121,10 @@
 				<div class="col-lg-4 sidebar">
 					
 					<div class="sidebar-box search-form-wrap mb-4">
-						<form action="#" class="sidebar-search-form">
+						<form action="{{ url('/search') }}" method="POST" class="sidebar-search-form">
+                            @csrf
 							<span class="bi-search"></span>
-							<input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+							<input name="keyword" type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
 						</form>
 					</div>
 

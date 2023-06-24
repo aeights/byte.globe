@@ -61,6 +61,7 @@
         </a>
     </div>
 @endsection
+
 {{-- @section('first-left')
     <div class="col-md-6">
         <div class="blog-entry">
@@ -85,6 +86,7 @@
         </div>
     </div>
 @endsection
+
 @section('first-right')
     <li>
         <span class="date">{{ $programming[2]->created_at }}</span>
@@ -107,6 +109,7 @@
         <p><a href="#" class="read-more">Continue Reading</a></p>
     </li>
 @endsection --}}
+
 @section('all-post')
     @foreach ($allpost as $item)
     <div class="col-lg-4 mb-4">

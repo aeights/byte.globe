@@ -13,7 +13,7 @@
     </div>
     <div class="col-lg-6 col-5 text-right">
         <a href="/dashboard/user/post/add" class="btn btn-sm btn-neutral">Add Post</a>
-        <a href="/blog" class="btn btn-sm btn-neutral">Blog</a>
+        <a href="/" class="btn btn-sm btn-neutral">Blog</a>
     </div>
 @endsection
 @section('content')

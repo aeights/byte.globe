@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\LikedPost;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -112,5 +113,13 @@ class UserPostController extends Controller
         $post->delete();
         unlink('post image/'.$request->old_image);
         return back()->with('message','Delete post successfully');
+    }
+
+    public function likedPost()
+    {
+        return view('user.likedpost',[
+            'title' => 'User',
+            'LikedPost' => LikedPost::where('user_id',Auth::user()->id)->get()
+        ]);
     }
 }

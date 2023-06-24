@@ -121,8 +121,19 @@
         <div class="container">
             <div class="row blog-entries element-animate">
                 <div class="col-md-12 col-lg-8 main-content">
-                    <div class="pt-5">
-                        <p>Category: <a href="#">{{ $post->category['category'] }}</a></p>
+                    <div class="d-flex justify-content-between pb-3">
+                        <div>
+                            <p>Category: <a href="#">{{ $post->category['category'] }}</a></p>
+                        </div>
+                        @if ($IsLiked)
+                        <div>
+                            <a href="{{ url('/unlike/'.$post->id) }}" class="btn btn-outline-success p-2">Unlike</a>
+                        </div>
+                        @else
+                        <div>
+                            <a href="{{ url('/like/'.$post->id) }}" class="btn btn-outline-success p-2">like</a>
+                        </div>
+                        @endif
                     </div>
 
                     <div class="post-content-body">
@@ -132,6 +143,14 @@
                 <!-- END main-content -->
 
                 <div class="col-md-12 col-lg-4 sidebar">
+                    <div class="sidebar-box search-form-wrap mb-4">
+						<form action="{{ url('/search') }}" method="POST" class="sidebar-search-form">
+                            @csrf
+							<span class="bi-search"></span>
+							<input name="keyword" type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+						</form>
+					</div>
+
                     <div class="sidebar-box">
                         @yield('author')
                     </div>
