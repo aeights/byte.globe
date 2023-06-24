@@ -39,9 +39,9 @@ Route::middleware(['guest'])->group(function () {
 
     Route::post('/register-process',[RegisterController::class,'register']);
 
-    Route::get('/logout',[LoginController::class,'logout']);
-
+    
 });
+Route::get('/logout',[LoginController::class,'logout']);
 
 Route::middleware(['auth','role:admin'])->group(function () {
     // DASHBOARD

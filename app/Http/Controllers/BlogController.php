@@ -10,19 +10,22 @@ class BlogController extends Controller
 {
     public function blog()
     {
+        $posts = Post::where('status','Accepted')->get();
         return view('index',[
             'category' => Category::all(),
-            'random' => Post::all()->random(5),
+            'random' => $posts->random(5),
             'programming' => Post::where('category_id',3)->get(),
-            'allpost' => Post::all(),
+            'allpost' => $posts,
         ]);
     }
     
     public function post($slug)
     {
+        $post = Post::where('slug',$slug)->first();
         return view('post',[
             'category' => Category::all(),
-            'post' => Post::where('slug',$slug)->fitst()
+            'post' => $post,
+            'image' => asset('post image/'.$post->image)
         ]);
     }
 

@@ -1,7 +1,7 @@
 @extends('layouts.blog')
 @section('top')
     <div class="col-md-4">
-        <a href="" class="h-entry mb-30 v-height gradient">
+        <a href="{{ url('/post/'.$random[0]->slug) }}" class="h-entry mb-30 v-height gradient">
             <div class="featured-img">
                 <img style="object-fit: cover; height: 300px;" src="{{ asset('/post image/' . $random[0]->image) }}"
                     alt="">
@@ -12,7 +12,7 @@
                 <h2>{{ $random[0]->title }}</h2>
             </div>
         </a>
-        <a href="" class="h-entry v-height gradient">
+        <a href="{{ url('/post/'.$random[1]->slug) }}" class="h-entry v-height gradient">
             <div class="featured-img">
                 <img style="object-fit: cover; height: 300px;" src="{{ asset('/post image/' . $random[1]->image) }}"
                     alt="">
@@ -25,7 +25,7 @@
         </a>
     </div>
     <div class="col-md-4">
-        <a href="" class="h-entry img-5 h-100 gradient">
+        <a href="{{ url('/post/'.$random[2]->slug) }}" class="h-entry img-5 h-100 gradient">
             <div class="featured-img">
                 <img style="object-fit: cover; height: 550px;" src="{{ asset('/post image/' . $random[2]->image) }}" alt="">
             </div>
@@ -37,7 +37,7 @@
         </a>
     </div>
     <div class="col-md-4">
-        <a href="" class="h-entry mb-30 v-height gradient">
+        <a href="{{ url('/post/'.$random[3]->slug) }}" class="h-entry mb-30 v-height gradient">
             <div class="featured-img">
                 <img style="object-fit: cover; height: 300px;" src="{{ asset('/post image/' . $random[3]->image) }}"
                     alt="">
@@ -48,7 +48,7 @@
                 <h2>{{ $random[3]->title }}</h2>
             </div>
         </a>
-        <a href="" class="h-entry v-height gradient">
+        <a href="{{ url('/post/'.$random[4]->slug) }}" class="h-entry v-height gradient">
             <div class="featured-img">
                 <img style="object-fit: cover; height: 300px;" src="{{ asset('/post image/' . $random[4]->image) }}"
                     alt="">
@@ -111,16 +111,16 @@
     @foreach ($allpost as $item)
     <div class="col-lg-4 mb-4">
         <div class="post-entry-alt">
-            <a href="" class="img-link"><img style="object-fit: cover; height: 250px;" src="{{ asset('post image/'.$item->image) }}" alt="Image"
+            <a href="{{ url('/post/'.$item->slug) }}" class="img-link"><img style="object-fit: cover; height: 250px;" src="{{ asset('post image/'.$item->image) }}" alt="Image"
                     class="img-fluid"></a>
             <div class="excerpt">
-                <h2><a href="">{{ $item->title }}</a></h2>
+                <h2><a href="{{ url('/post/'.$item->slug) }}">{{ $item->title }}</a></h2>
                 <div class="post-meta align-items-center text-left clearfix">
                     <span class="d-inline-block mt-1">By <a href="#">{{ $item->user['name'] }}</a></span>
                     <span>{{ $item->created_at }}</span>
                 </div>
-                <p>{{ substr($item->body, 0, 80) }}</p>
-                <p><a href="#" class="read-more">Continue Reading</a></p>
+                <p>{{ substr($item->body, 0, 70) }}</p>
+                <p><a href="{{ url('/post/'.$item->slug) }}" class="read-more">Continue Reading</a></p>
             </div>
         </div>
     </div>

@@ -32,7 +32,9 @@
             <!-- Brand -->
             <div class="sidenav-header d-flex align-items-center">
                 <a class="navbar-brand" href="">
-                    <img src="/argon/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+                    {{-- <img src="/argon/assets/img/brand/blue.png" class="navbar-brand-img" alt="..."> --}}
+                    <i class="ni ni-spaceship"></i>
+                    <span>Byte.Globe</span>
                 </a>
                 <div class="ml-auto">
                     <!-- Sidenav toggler -->
